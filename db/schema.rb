@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150715014315) do
+ActiveRecord::Schema.define(version: 20150716045318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,32 @@ ActiveRecord::Schema.define(version: 20150715014315) do
   end
 
   add_index "unique_words", ["word"], name: "index_unique_words_on_word", unique: true, using: :btree
+
+  create_table "user_tokens", primary_key: "token", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.string   "device",     null: false
+    t.datetime "expires_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_tokens", ["user_id"], name: "index_user_tokens_on_user_id", using: :btree
+
+  create_table "users", force: :cascade do |t|
+    t.string   "nickname",        limit: 15,              null: false
+    t.string   "email",           limit: 255
+    t.string   "phone",           limit: 63
+    t.string   "password_digest"
+    t.integer  "failed_attempts",             default: 0, null: false
+    t.string   "unlock_token"
+    t.datetime "locked_at"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["nickname"], name: "index_users_on_nickname", unique: true, using: :btree
+  add_index "users", ["phone"], name: "index_users_on_phone", unique: true, using: :btree
 
   create_table "wiki_definitions", force: :cascade do |t|
     t.integer "wiki_unique_word_id", null: false

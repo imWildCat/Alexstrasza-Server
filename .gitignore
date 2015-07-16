@@ -15,3 +15,5 @@
 .idea
 
 lib/tasks/word_transfer.rake
+
+db/data.yml
