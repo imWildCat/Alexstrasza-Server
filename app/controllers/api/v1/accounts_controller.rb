@@ -1,5 +1,7 @@
 class Api::V1::AccountsController < Api::V1::BaseApiControllerController
 
+  before_action :authenticate!, only: :profile
+
   def reg
     new_user_data = params.permit(:nickname, :email, :phone, :password)
     user = User.new new_user_data
@@ -20,6 +22,10 @@ class Api::V1::AccountsController < Api::V1::BaseApiControllerController
       @token = user_token.token
       @user = user
     end
+  end
+
+  def profile
+    @user = current_user
   end
 
 end

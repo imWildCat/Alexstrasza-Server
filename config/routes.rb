@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
       resource :account do
         post :reg, :login
+        get :profile
       end
 
     end

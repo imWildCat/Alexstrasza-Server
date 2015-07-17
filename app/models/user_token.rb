@@ -9,6 +9,10 @@ class UserToken < ActiveRecord::Base
     t
   end
 
+  def expired?
+    expires_at <= Time.now
+  end
+
   protected
 
   def generate_token
