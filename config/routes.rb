@@ -21,6 +21,10 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
 
+      scope :site do
+        get 'status' => 'site#status'
+      end
+
       resources :users, only: [:show]
 
       resource :account do

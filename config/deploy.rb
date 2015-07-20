@@ -4,6 +4,9 @@ lock '3.4.0'
 set :application, 'alexstrasza'
 set :repo_url, 'git://github.com/imWildCat/Alexstrasza-Server.git'
 
+set :stages, %w(production staging)
+# set :default_stage, 'staging'
+
 set :rbenv_ruby, '2.2.2'
 
 # play nice with rvm
