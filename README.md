@@ -8,7 +8,7 @@ An English learning system built with Rails.
 We mainly support RESTful API, here are details:
 
 > **Notice:**   
-> 1. The version number of all the following APIs is 1, so they begin with a prefix `/api/v1`. For example, `/account/reg` means `/api/v1/account/reg`.  
+> 1. The version number of all the following APIs is 1, so API URLs begin with a prefix `/api/v1`. For example, `/account/reg` means `/api/v1/account/reg`.  
 > 2. We are using token-based [RBAC](https://en.wikipedia.org/wiki/Role-based_access_control)(Role-based access control) in this application. You must post `email` & `password` to `/account/login` to get a `token`. Then add the token to `token` field of HTTP header.
 
 ## Error response
@@ -48,6 +48,23 @@ Here are some of the error codes:
 
 For more details, plesase visit [api\_v1_helper.rb](https://github.com/imWildCat/Alexstrasza-Server/blob/master/app/helpers/api_v1_helper.rb) .
 
+## Site
+
+### Status
+
+```
+GET /site/status
+```
+
+**Positive Response:**  
+
+```json
+{
+	"status": true,
+	"version": "0.0.1"
+}
+```
+
 ## Account
 
 > This part includes: registration, logging in.
@@ -55,7 +72,7 @@ For more details, plesase visit [api\_v1_helper.rb](https://github.com/imWildCat
 ### Registration
 
 ```
-/account/reg
+POST /account/reg
 ```
 Parameter|Description
 ---|---
@@ -77,7 +94,7 @@ password|Password
 ### Logging in
 
 ```
-/account/login
+POST /account/login
 ```
 Parameter|Description
 ---|---
